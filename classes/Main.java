@@ -25,7 +25,11 @@ public class Main {
 
         while (yes) {
 
+            System.out.println("\nAteliê EncanARTE\n" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
+
+
             System.out.println("\nAteliê EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
+
 
                     + "\n3. Acessar Estoque " + "\n4. Cancelar Venda" + "\n5. Listar Clientes"
                     + "\n6. Buscar cliente(pelo cpf)" + "\n7. Aquisição de Produtos" + "\n8. Excluir Clientes"
@@ -48,6 +52,10 @@ public class Main {
                         } else if (codigo1 == 0) {
                             System.out.println("Operação inválida");
                         }
+                    }
+                    if(p.isEmpty()){
+                        System.out.println("Precisa ter o produto cadastrado");
+
                     }
 
                     break;
@@ -150,26 +158,30 @@ public class Main {
 
                     break;
                 case 4:
-                    System.out.println("Cancelar vendas: ");
+
+                    System.out.println("Digite o código: ");
                     int cod4 = scan.nextInt();
                     for (Produtos produtos4 : p) {
                         if (produtos4.getCodigo() == cod4) {
                             // ArrayList<Caixa> caixa4 = new ArrayList<>();
                             // caixa4.add(caixa.get(caixa.size() - 2));
-                            double preco = 0;
-                            preco -= produtos4.getPreco();
-                            double vendas4 = 1;
-                            vendas4 -= 1;
-                            caixa.add(new Caixa(vendas4, preco));
-                            System.out.println("Saldo atual: " + caixa.get(caixa.size() - 1));
+                            soma -= 1;
+                            saldo -= produtos4.getPreco();
 
-                        } else if (produtos4.getCodigo() != cod4) {
-                            System.out.println("Código inválido!");
+                            caixa.add(new Caixa(soma, saldo));
+                            System.out.println("Saldo atual: " + caixa.get(caixa.size() - 1));
+                            break;
+                        } else if (cod4 != produtos4.getCodigo()) {
+                            System.out.println("Operação inválida !");
+                            break;
 
                         }
 
                     }
+                    if(p.isEmpty()){
+                        System.out.println("Precisa cadastrar um produto(Fazer Aquisição). ");
 
+                    }
                     break;
                 case 5:
 
