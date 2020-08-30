@@ -1,6 +1,7 @@
 import java.util.Objects;
 
 public class Caixa {
+
     private double vendas = 0;
     private double saldo = 0;
 
@@ -56,11 +57,7 @@ public class Caixa {
 
     @Override
     public String toString() {
-        return "{" +
-            " vendas='" + getVendas() + "'" +
-            ", saldo='" + getSaldo() + "'" +
-            "}";
+        return "{" + " vendas='" + getVendas() + "'" + ", saldo='" + getSaldo() + "'" + "}";
     }
 
-  
 }
