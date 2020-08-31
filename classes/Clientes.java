@@ -58,16 +58,11 @@ public class Clientes extends Pessoas {
         clientes.add(new Clientes(nomeCliente, cpf, email, telefone, adress));
         enderecos.add(new Endereco(rua, bairro, numero, cidade, uf, cep, complemento));
 
-        if (c.getCpf() == null || c.getEmail() == null) {
-
-            throw new Exception("Nenhum dos campos obrigatórios podem ficar vazios.");
-
-        }
     }
 
-    public void listarClientes() {
+    public void listarClientes() throws NullPointerException{
 
-        if (clientes.size() > 0) {
+        try {
 
             for (int j = 0; j < clientes.size(); j++) {
 
@@ -75,37 +70,38 @@ public class Clientes extends Pessoas {
 
             }
 
-        } else {
+        } catch (NullPointerException nullPointerException) {
 
-            System.out.println("Não possui clientes cadastrados!");
+            System.err.println(nullPointerException);
+            System.out.println("Não há clientes cadastrados!");
+
         }
 
     }
 
-    public void buscarCliente(String cpf) {
+    public void buscarCliente(String cpf) throws Exception {
 
-        if (clientes.size() > 0) {
+        for (int j = 0; j < clientes.size(); j++) {
 
-            for (int j = 0; j < clientes.size(); j++) {
+            // if (clientes.get(j).getCpf() != null) {
 
-                if (clientes.get(j).getCpf().equals(cpf)) {
+            if (clientes.get(j).getCpf().equals(cpf)) {
 
-                    System.out.println(clientes.get(j).toString());
+                System.out.println(clientes.get(j).toString());
 
-                    break;
-                }
-
-                if (clientes.get(j).getCpf() != cpf) {
-
-                    System.out.println("Cliente não encontrado!");
-
-                }
+                break;
             }
 
-        } else {
-
-            System.out.println("Não possui clientes cadastrados!");
         }
+
+        // } catch (Exception e) {
+
+        // throw new Exception(e);
+        // }
+
+        // }else{
+
+        // }
 
     }
 

@@ -1,9 +1,9 @@
 import java.util.Scanner;
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Scanner scan = new Scanner(System.in);
 
@@ -22,6 +22,7 @@ public class Main {
         Gerente gerente = new Gerente();
 
         boolean yes = true;
+        boolean continua = true;
 
         while (yes) {
 
@@ -61,68 +62,63 @@ public class Main {
                     break;
                 case 2:
 
-                    try {
+                    do {
 
-                        Clientes client = new Clientes();
+                        try {
 
-                        System.out.println("Cadastrar clientes");
-                        System.out.println("Dados pessoais");
-                        System.out.println("*** *** ***");
-                        System.out.println("Digite o nome do cliente : ");
-                        nomeCliente = scan.next();
-                        System.out.println("Digite o cpf do cliente : ");
-                        cpf = scan.next();
-                        System.out.println("Digite o email do cliente : ");
-                        email = scan.next();
-                        System.out.println("Digite o telefone do cliente : ");
-                        telefone = scan.next();
-                        System.out.println("*** *** ***");
-                        System.out.println("Endereço");
-                        Endereco adress = new Endereco();
+                            Clientes client = new Clientes();
 
-                        System.out.println("Digite o nome da rua : ");
-                        rua = scan.next();
-                        // e.setRua(rua);
-                        System.out.println("Digite o nome do bairro : ");
-                        bairro = scan.next();
-                        System.out.println("Digite o número da residencia : ");
-                        numeroCasa = scan.nextInt();
-                        System.out.println("Digite a cidade : ");
-                        cidade = scan.next();
-                        System.out.println("Digite o estado : ");
-                        uf = scan.next();
-                        System.out.println("Digite o cep : ");
-                        cep = scan.next();
-                        System.out.println("Digite o complemento : ");
-                        complemento = scan.next();
+                            System.out.println("Cadastrar clientes");
+                            System.out.println("Dados pessoais");
+                            System.out.println("*** *** ***");
+                            System.out.println("Digite o nome do cliente : ");
+                            nomeCliente = scan.next();
+                            System.out.println("Digite o cpf do cliente : ");
+                            cpf = scan.next();
+                            System.out.println("Digite o email do cliente : ");
+                            email = scan.next();
+                            System.out.println("Digite o telefone do cliente : ");
+                            telefone = scan.next();
+                            System.out.println("*** *** ***");
+                            System.out.println("Endereço");
+                            Endereco adress = new Endereco();
 
-                        newCliente.cadastrarCliente(client, adress, nomeCliente, cpf, email, telefone, rua, bairro,
-                                numeroCasa, cidade, uf, cep, complemento);
-                        // c.add(new Clientes(nomeCliente, cpf, email, telefone, endereco));
-                        // endereco.add(new Endereco(rua, bairro, numeroCasa, cidade, uf, cep,
-                        // complemento));
+                            System.out.println("Digite o nome da rua : ");
+                            rua = scan.next();
+                            // e.setRua(rua);
+                            System.out.println("Digite o nome do bairro : ");
+                            bairro = scan.next();
+                            System.out.println("Digite o número da residencia : ");
+                            numeroCasa = scan.nextInt();
 
-                        System.out.println("Cliente cadastrado com sucesso!");
+                            System.out.println("Digite a cidade : ");
+                            cidade = scan.next();
+                            System.out.println("Digite o estado : ");
+                            uf = scan.next();
+                            System.out.println("Digite o cep : ");
+                            cep = scan.next();
+                            System.out.println("Digite o complemento : ");
+                            complemento = scan.next();
 
-                    } catch (java.util.InputMismatchException erro) {
+                            newCliente.cadastrarCliente(client, adress, nomeCliente, cpf, email, telefone, rua, bairro,
+                                    numeroCasa, cidade, uf, cep, complemento);
 
-                        System.out.println("Você digitou uma letra " + erro.getMessage());
+                            System.out.println("Cliente cadastrado com sucesso!");
 
-                    } catch (NullPointerException r) {
+                            continua = false;
 
-                        System.out.println("Você tentou acessar algo que não foi criado");
+                        } catch (InputMismatchException inputMismatchException) {
 
-                    } catch (Exception b) {
+                            System.err.println("\nException : %s\n" + inputMismatchException);
+                            scan.nextLine();
+                            System.out.println("Digite apenas números inteiros para o n° da casa");
 
-                        System.out.println("Erro generico");
+                        }
 
-                    } finally {
-
-                        System.out.println("Sempre roda aqui independente se foi ok ou não");
-
-                    }
+                    } while (continua);
 
                     break;
+
                 case 3:
                     // Acesso ao estoque
                     System.out.println("Digite o usuário: ");
@@ -183,6 +179,7 @@ public class Main {
 
                     }
                     break;
+                    
                 case 5:
 
                     newCliente.listarClientes();
