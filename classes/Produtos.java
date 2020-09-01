@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Produtos {
-    private int codigo;
+    private int codigo = 0;
     private String nome;
     private double preco;
     private int quantidade;
