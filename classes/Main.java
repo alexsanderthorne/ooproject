@@ -26,7 +26,7 @@ public class Main {
 
         while (yes) {
 
-            System.out.println("\nAteliê EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
+            System.out.println("\nStudio EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
 
                     + "\n3. Acessar Estoque " + "\n4. Cancelar Venda" + "\n5. Listar Clientes"
                     + "\n6. Buscar cliente(pelo cpf)" + "\n7. Aquisição de Produtos" + "\n8. Excluir Clientes"
@@ -167,9 +167,11 @@ public class Main {
                     }
 
                     break;
-                    
+
                 case 5:
 
+                    System.out.println("Lista de clientes");
+                    System.out.println("*****************");
                     newCliente.listarClientes();
 
                     break;
@@ -179,7 +181,8 @@ public class Main {
                     System.out.println("Digite o numero do cpf o qual deseja consultar : ");
                     cpf = scan.next();
                     newCliente.buscarCliente(cpf);
-
+                    scan.nextLine();
+                    System.out.println("... ...");
                     break;
 
                 case 7:
@@ -200,6 +203,7 @@ public class Main {
                     System.out.println("Digite o cpf do cliente : ");
                     cpf = scan.next();
                     newCliente.removerClientes(cpf);
+                    scan.nextLine();
 
                     break;
 
