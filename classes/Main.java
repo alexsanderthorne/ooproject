@@ -27,7 +27,7 @@ public class Main {
 
         while (yes) {
 
-            System.out.println("\nAteliê EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
+            System.out.println("\nStudio EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
 
                     + "\n3. Acessar Estoque " + "\n4. Cancelar Venda" + "\n5. Listar Clientes"
                     + "\n6. Buscar cliente(pelo cpf)" + "\n7. Aquisição de Produtos" + "\n8. Excluir Clientes"
