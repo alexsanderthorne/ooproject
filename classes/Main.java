@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -10,7 +12,6 @@ public class Main {
         String nomeCliente, cpf, email, telefone, rua, bairro, cidade, uf, cep, complemento;
         double soma = 0, saldo = 0;
         int numeroCasa = 0;
-        int quant = 1;
 
         ArrayList<Caixa> caixa = new ArrayList<Caixa>();
         ArrayList<Estoque> estoque = new ArrayList<Estoque>();
