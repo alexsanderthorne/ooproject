@@ -6,18 +6,56 @@ public class Clientes extends Pessoas {
     private Endereco adress;
     private ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
     private ArrayList<Clientes> clientes = new ArrayList<Clientes>();
+    private int quantidade_de_produtos_comprados;
 
-    public Clientes(String nome, String cpf, String email, String telefone, Endereco adress) {
+    public Clientes(String nome, String cpf, String email, String telefone, Endereco adress,int quantidade_de_produtos_comprados) {
         super(nome, cpf, email, telefone);
         this.adress = adress;
+        this.quantidade_de_produtos_comprados = quantidade_de_produtos_comprados;
     }
 
     public Clientes() {
     }
 
+    public Clientes(Endereco adress, ArrayList<Endereco> enderecos, ArrayList<Clientes> clientes, int quantidade_de_produtos_comprados) {
+        this.adress = adress;
+        this.enderecos = enderecos;
+        this.clientes = clientes;
+        this.quantidade_de_produtos_comprados = quantidade_de_produtos_comprados;
+    }
+
+    public int getQuantidade_de_produtos_comprados() {
+        return this.quantidade_de_produtos_comprados;
+    }
+
+    public void setQuantidade_de_produtos_comprados(int quantidade_de_produtos_comprados) {
+        this.quantidade_de_produtos_comprados = quantidade_de_produtos_comprados;
+    }
+
+    public Clientes adress(Endereco adress) {
+        this.adress = adress;
+        return this;
+    }
+
+    public Clientes enderecos(ArrayList<Endereco> enderecos) {
+        this.enderecos = enderecos;
+        return this;
+    }
+
+    public Clientes clientes(ArrayList<Clientes> clientes) {
+        this.clientes = clientes;
+        return this;
+    }
+
+    public Clientes quantidade_de_produtos_comprados(int quantidade_de_produtos_comprados) {
+        this.quantidade_de_produtos_comprados = quantidade_de_produtos_comprados;
+        return this;
+    }
+
     public Endereco getAdress() {
         return this.adress;
     }
+    
 
     public void setAdress(Endereco adress) {
         this.adress = adress;
@@ -55,7 +93,7 @@ public class Clientes extends Pessoas {
         adress.setCep(cep);
         adress.setComplemento(complemento);
 
-        clientes.add(new Clientes(nomeCliente, cpf, email, telefone, adress));
+        clientes.add(new Clientes(nomeCliente, cpf, email, telefone, adress,quantidade_de_produtos_comprados));
         enderecos.add(new Endereco(rua, bairro, numero, cidade, uf, cep, complemento));
 
     }

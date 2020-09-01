@@ -26,11 +26,7 @@ public class Main {
 
         while (yes) {
 
-            System.out.println("\nAteliê EncanARTE\n" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
-
-
             System.out.println("\nAteliê EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
-
 
                     + "\n3. Acessar Estoque " + "\n4. Cancelar Venda" + "\n5. Listar Clientes"
                     + "\n6. Buscar cliente(pelo cpf)" + "\n7. Aquisição de Produtos" + "\n8. Excluir Clientes"
@@ -39,27 +35,66 @@ public class Main {
             int op = scan.nextInt();
 
             switch (op) {
+
                 case 1:
 
-                    System.out.println("Digite o código do produto: ");
-                    int codigo1 = scan.nextInt();
-                    for (Produtos p1 : p) {
-                        if (p1.getCodigo() == codigo1) {
-                            soma += 1;
-                            saldo += p1.getPreco();
+                    if (p.isEmpty()) {
 
-                            caixa.add(new Caixa(soma, saldo));
-                            System.out.println("Compra realizado com sucesso !");
-                        } else if (codigo1 == 0) {
-                            System.out.println("Operação inválida");
-                        }
-                    }
-                    if(p.isEmpty()){
                         System.out.println("Precisa ter o produto cadastrado");
+                        break;
 
+                    }
+
+                    try {
+
+                        System.out.println("Digite o código do produto: ");
+                        int codigo1 = scan.nextInt();
+
+                        for (Produtos p1 : p) {
+
+                            if (p1.getCodigo() == codigo1) {
+
+                                int i = (p1.getQuantidade() - 1);
+                                p1.setQuantidade(i);
+                                soma += 1;
+                                saldo += p1.getPreco();
+
+                                caixa.add(new Caixa(soma, saldo));
+                                System.out.println("Venda realizada com sucesso: " + p1.getNome());
+
+                            }
+                        }
+
+                    } catch (NullPointerException nullPointerException) {
+
+                        System.err.println("\nException : %s\n" + nullPointerException);
+                        scan.nextLine();
+                        System.out.println("Operação inválida");
+                    }
+
+                    System.out.println("Relacionar 1 sim 2 não ?");
+                    int opcao = scan.nextInt();
+
+                    if (opcao == 1) {
+
+                        System.out.println("Digite o cpf: ");
+                        String cpf_cli = scan.next();
+
+                        if (newCliente.getCpf().equals(cpf_cli)) {
+
+                            int q = (newCliente.getQuantidade_de_produtos_comprados() + 1);
+                            newCliente.setQuantidade_de_produtos_comprados(q);
+                            System.out.println("compra relacionada ao cliente" + newCliente.getNome());
+
+                        }
+
+                    } else {
+
+                        System.out.println("Opção inválido;");
                     }
 
                     break;
+
                 case 2:
 
                     do {
@@ -159,8 +194,8 @@ public class Main {
                     int cod4 = scan.nextInt();
                     for (Produtos produtos4 : p) {
                         if (produtos4.getCodigo() == cod4) {
-                            // ArrayList<Caixa> caixa4 = new ArrayList<>();
-                            // caixa4.add(caixa.get(caixa.size() - 2));
+                            int i = (produtos4.getQuantidade() + 1);
+                            produtos4.setQuantidade(i);
                             soma -= 1;
                             saldo -= produtos4.getPreco();
 
@@ -174,12 +209,12 @@ public class Main {
                         }
 
                     }
-                    if(p.isEmpty()){
+                    if (p.isEmpty()) {
                         System.out.println("Precisa cadastrar um produto(Fazer Aquisição). ");
 
                     }
                     break;
-                    
+
                 case 5:
 
                     newCliente.listarClientes();
