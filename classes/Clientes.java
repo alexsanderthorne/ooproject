@@ -15,6 +15,106 @@ public class Clientes extends Pessoas {
     public Clientes() {
     }
 
+    public void cadastrarCliente(Clientes c, Endereco adress, String nomeCliente, String cpf, String email,
+            String telefone, String rua, String bairro, int numero, String cidade, String uf, String cep,
+            String complemento) throws Exception {
+
+        c.setCpf(cpf);
+        c.setNome(nomeCliente);
+        c.setEmail(email);
+        c.setTelefone(telefone);
+        adress.setRua(rua);
+        adress.setBairro(bairro);
+        adress.setNumero(numero);
+        adress.setCidade(cidade);
+        adress.setUF(uf);
+        adress.setCep(cep);
+        adress.setComplemento(complemento);
+
+        clientes.add(new Clientes(nomeCliente, cpf, email, telefone, adress));
+        enderecos.add(new Endereco(rua, bairro, numero, cidade, uf, cep, complemento));
+
+    }
+
+    public void listarClientes() throws NullPointerException {
+
+        try {
+
+            for (int j = 0; j < clientes.size(); j++) {
+
+                System.out.println(clientes.get(j).toString());
+
+            }
+
+        } catch (NullPointerException nullPointerException) {
+
+            System.err.println(nullPointerException);
+            System.out.println("Não há clientes cadastrados!");
+
+        }
+
+    }
+
+    public void buscarCliente(String cpf) throws Exception {
+
+        if (clientes.size() > 0) {
+
+            try {
+
+                for (Clientes c : clientes) {
+
+                    if (c.getCpf().equals(cpf)) {
+
+                        System.out.println(c.toString());
+                        break;
+
+                    }
+                }
+
+            } catch (NullPointerException nullPointerException) {
+
+                System.err.println("\nException : %s\n" + nullPointerException);
+
+                System.out.println("Cliente não encontrado");
+            }
+
+        } else {
+
+            throw new Exception("Não há clientes cadastrados.");
+
+        }
+    }
+
+    public void removerClientes(String cpf) {
+
+        if (clientes.size() > 0) {
+
+            try {
+
+                for (int i = 0; i < clientes.size(); i++) {
+
+                    if (clientes.get(i).getCpf().equals(cpf)) {
+
+                        clientes.remove(clientes.get(i));
+                        System.out.println("Cliente apagado do banco de dados!");
+                        
+                    }
+
+                }
+
+            } catch (NullPointerException nullPointerException) {
+
+                System.err.println("\nException : %s\n" + nullPointerException);
+                System.out.println("Cliente não encontrado");
+            }
+
+        } else {
+
+            System.out.println("Não possui clientes cadastrados!");
+
+        }
+    }
+
     public Endereco getAdress() {
         return this.adress;
     }
@@ -37,98 +137,6 @@ public class Clientes extends Pessoas {
 
     public void setClientes(ArrayList<Clientes> clientes) {
         this.clientes = clientes;
-    }
-
-    public void cadastrarCliente(Clientes c, Endereco adress, String nomeCliente, String cpf, String email,
-            String telefone, String rua, String bairro, int numero, String cidade, String uf, String cep,
-            String complemento) throws Exception {
-
-        c.setCpf(cpf);
-        c.setNome(nomeCliente);
-        c.setEmail(email);
-        c.setTelefone(telefone);
-        adress.setRua(rua);
-        adress.setBairro(bairro);
-        adress.setNumero(numero);
-        adress.setCidade(cidade);
-        adress.setUF(uf);
-        adress.setCep(cep);
-        adress.setComplemento(complemento);
-
-        clientes.add(new Clientes(nomeCliente, cpf, email, telefone, adress));
-        enderecos.add(new Endereco(rua, bairro, numero, cidade, uf, cep, complemento));
-
-    }
-
-    public void listarClientes() throws NullPointerException{
-
-        try {
-
-            for (int j = 0; j < clientes.size(); j++) {
-
-                System.out.println(clientes.get(j).toString());
-
-            }
-
-        } catch (NullPointerException nullPointerException) {
-
-            System.err.println(nullPointerException);
-            System.out.println("Não há clientes cadastrados!");
-
-        }
-
-    }
-
-    public void buscarCliente(String cpf) throws Exception {
-
-        for (int j = 0; j < clientes.size(); j++) {
-
-            // if (clientes.get(j).getCpf() != null) {
-
-            if (clientes.get(j).getCpf().equals(cpf)) {
-
-                System.out.println(clientes.get(j).toString());
-
-                break;
-            }
-
-        }
-
-        // } catch (Exception e) {
-
-        // throw new Exception(e);
-        // }
-
-        // }else{
-
-        // }
-
-    }
-
-    public void removerClientes(String cpf) {
-
-        if (clientes.size() > 0) {
-
-            for (int i = 0; i < clientes.size(); i++) {
-
-                if (clientes.get(i).getCpf().equals(cpf)) {
-
-                    clientes.remove(clientes.get(i));
-
-                } else {
-
-                    System.out.println("Cliente não encontrado!");
-                }
-
-            }
-
-            System.out.println("Cliente apagado do banco de dados!");
-
-        } else {
-
-            System.out.println("Não possui clientes cadastrados!");
-
-        }
     }
 
     @Override
