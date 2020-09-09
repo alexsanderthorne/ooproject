@@ -141,7 +141,7 @@ public class Main {
                                     System.out.println("Está na lista");
                                     System.out.println(pro.toString());
 
-                                } else if (pro.getQuantidade() == 0) {
+                                } else {
 
                                     System.out.println("Operação inválida");
                                 }
@@ -267,7 +267,7 @@ public class Main {
 
                         if (pessoas.get(i) != null && (pessoas.get(i) instanceof Clientes)) {
 
-                            if (pessoas.get(i).getCpf().equals(cpf) && (pessoas.get(i) instanceof Clientes)) {
+                            if (pessoas.get(i).getCpf().equals(cpf)) {
 
                                 // scan.nextLine();
                                 pessoas.remove(pessoas.get(i));
@@ -300,51 +300,120 @@ public class Main {
 
                     }
 
+                case 10:
+
+                    if (pessoas.size() > 0) {
+
+                        System.out.println("Digite o numero do CPF (somente números):");
+                        String Cpf = scan.next();
+
+                        for (int i = 0; i < pessoas.size(); i++) {
+
+                            if (pessoas.get(i) != null && (pessoas.get(i) instanceof Clientes)) {
+
+                                if (pessoas.get(i).getCpf().equals(Cpf)) {
+
+                                    System.out.println("Digite o novo telefone : ");
+                                    String telefone = scan.next();
+                                    System.out.println("Digite o novo email : ");
+                                    String email = scan.next();
+                                    pessoas.get(i).setTelefone(telefone);
+                                    pessoas.get(i).setEmail(email);
+
+                                    System.out.println("Novo Telefone : " + pessoas.get(i).getTelefone());
+                                    ;
+                                    System.out.println("Novo email : " + pessoas.get(i).getEmail());
+
+                                } else {
+
+                                    System.out.println("Cpf não encontrado!");
+
+                                }
+
+                            } else {
+
+                                System.out.println("Não há clientes cadastrados!");
+                            }
+                        }
+                    }
+
+                    break;
+
                 case 11:
 
-                    System.out.println("Cadastrar funcionarios");
-                    System.out.println("Dados pessoais");
-                    System.out.println("*** *** ***");
-                    System.out.println("Digite o nome do Funcionario : ");
-                    String nomeFunc = scan.next();
-                    System.out.println("Digite o cpf : ");
-                    String cpfFuncionario = scan.next();
-                    System.out.println("Digite o email : ");
-                    String email = scan.next();
-                    System.out.println("Digite o telefone : ");
-                    String telefone = scan.next();
-                    System.out.println("Digite o id do funcionario : ");
-                    String id = scan.next();
+                    System.out.println("Digite o usuário: ");
+                    login = scan.next();
+                    System.out.println("Digite a senha: ");
+                    senha = scan.next();
 
-                    pessoas.add(new Funcionario(nomeFunc, cpfFuncionario, email, telefone, id));
-                    System.out.println("Funcionário cadastrado com sucesso");
+                    gerente = new Gerente();
+
+                    if (gerente.getLOGIN().equals(login) & gerente.getSENHA().equals(senha)) {
+
+                        System.out.println("Cadastrar funcionarios");
+                        System.out.println("Dados pessoais");
+                        System.out.println("*** *** ***");
+                        System.out.println("Digite o nome do Funcionario : ");
+                        String nomeFunc = scan.next();
+                        System.out.println("Digite o cpf : ");
+                        String cpfFuncionario = scan.next();
+                        System.out.println("Digite o email : ");
+                        String email = scan.next();
+                        System.out.println("Digite o telefone : ");
+                        String telefone = scan.next();
+                        System.out.println("Digite o id do funcionario : ");
+                        String id = scan.next();
+
+                        pessoas.add(new Funcionario(nomeFunc, cpfFuncionario, email, telefone, id));
+                        System.out.println("Funcionário cadastrado com sucesso");
+
+                    } else {
+
+                        System.out.println("Login ou senha inválidos");
+
+                    }
 
                     break;
 
                 case 12:
 
-                    System.out.println("Digite o id do funcionário : ");
-                    String idFunc = scan.next();
+                    System.out.println("Digite o usuário: ");
+                    login = scan.next();
+                    System.out.println("Digite a senha: ");
+                    senha = scan.next();
 
-                    for (int i = 0; i < pessoas.size(); i++) {
+                    gerente = new Gerente();
 
-                        if (pessoas.get(i) != null && (pessoas.get(i) instanceof Funcionario)) {
+                    if (gerente.getLOGIN().equals(login) & gerente.getSENHA().equals(senha)) {
 
-                            if (pessoas.get(i).getCpf().equals(idFunc)) {
+                        System.out.println("Digite o id do funcionário : ");
+                        String idFunc = scan.next();
 
-                                // scan.nextLine();
-                                pessoas.remove(pessoas.get(i));
-                                System.out.println("Funcionario apagado do banco de dados!");
+                        for (int i = 0; i < pessoas.size(); i++) {
+
+                            if (pessoas.get(i) != null && (pessoas.get(i) instanceof Funcionario)) {
+
+                                if (pessoas.get(i).getCpf().equals(idFunc)) {
+
+                                    // scan.nextLine();
+                                    pessoas.remove(pessoas.get(i));
+                                    System.out.println("Funcionario apagado do banco de dados!");
+
+                                } else {
+
+                                    System.out.println("Cpf não encontrado!");
+                                }
 
                             } else {
 
-                                System.out.println("Cpf não encontrado!");
+                                System.out.println("Nenhum Empregado cadastrado até o momento!");
                             }
-
-                        } else {
-
-                            System.out.println("Nenhum Empregado cadastrado até o momento!");
                         }
+
+                    } else {
+
+                        System.out.println("Login ou senha inválidos");
+
                     }
 
                     break;
