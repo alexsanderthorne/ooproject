@@ -9,7 +9,6 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         double soma = 0, saldo = 0;
-        // int quant = 1;
 
         ArrayList<Caixa> caixa = new ArrayList<Caixa>();
         ArrayList<Estoque> estoque = new ArrayList<Estoque>();
@@ -38,14 +37,19 @@ public class Main {
 
                     System.out.println("Digite o código do produto: ");
                     int codigo1 = scan.nextInt();
+
                     for (Produtos p1 : p) {
+
                         if (p1.getCodigo() == codigo1) {
+
                             soma += 1;
                             saldo += p1.getPreco();
 
                             caixa.add(new Caixa(soma, saldo));
                             System.out.println("Compra realizado com sucesso !");
+
                         } else if (codigo1 == 0) {
+
                             System.out.println("Operação inválida");
                         }
                     }
@@ -75,7 +79,6 @@ public class Main {
 
                             System.out.println("Digite o nome da rua : ");
                             String rua = scan.next();
-                            // e.setRua(rua);
                             System.out.println("Digite o nome do bairro : ");
                             String bairro = scan.next();
                             System.out.println("Digite o número da residencia : ");
@@ -119,21 +122,30 @@ public class Main {
                     Gerente gerente = new Gerente();
 
                     if (gerente.getLOGIN().equals(login) & gerente.getSENHA().equals(senha)) {
+
                         System.out
                                 .println("Acessar estoque: 1-Ver todos os produtos 2-pesquisar por código do produto");
 
                         int o = scan.nextInt();
+
                         if (o == 1) {
+
                             System.out.println(estoque.toString());
 
                         } else if (o == 2) {
+
                             System.out.println("Digite o Código");
                             int testar = scan.nextInt();
+
                             for (Produtos pro : p) {
+
                                 if (pro.getCodigo() == testar) {
+
                                     System.out.println("Está na lista");
                                     System.out.println(pro.toString());
+
                                 } else if (pro.getQuantidade() == 0) {
+
                                     System.out.println("Operação inválida");
                                 }
 
@@ -141,10 +153,13 @@ public class Main {
                         }
 
                     } else {
+
                         System.out.println("Login ou senha inválidos");
+
                     }
 
                     break;
+
                 case 4:
 
                     System.out.println("Cancelar vendas: ");
@@ -179,17 +194,23 @@ public class Main {
                     System.out.println("Lista de clientes");
                     System.out.println("*****************");
 
-                    for (Pessoas person : pessoas) {
+                    try {
 
-                        if (person != null && (person instanceof Clientes)) {
+                        for (Pessoas person : pessoas) {
 
-                            System.out.println("Nome : " + person.getNome());
-                            System.out.println("Telefone : " + person.getTelefone());
+                            if (person != null && (person instanceof Clientes)) {
 
-                        } else {
+                                System.out.println("Nome : " + person.getNome());
+                                System.out.println("Telefone : " + person.getTelefone());
 
-                            System.out.println("Nenhuma pessoa cadastrada até o momento!");
+                            }
                         }
+
+                    } catch (NullPointerException nullPointerException) {
+
+                        System.err.println("\nException : %s\n" + nullPointerException);
+                        scan.nextLine();
+                        System.out.println("Nenhum cliente cadastrado até o momento!");
 
                     }
 
@@ -199,13 +220,13 @@ public class Main {
 
                     if (pessoas.size() > 0) {
 
-                        System.out.println("Digite o numero do CPF (somente números):");
+                        System.out.println("Digite o numero do Cpf :");
                         String Cpf = scan.next();
                         // Pessoas person = buscarPessoa(Cpf, pessoas);
 
                         for (Pessoas person : pessoas) {
 
-                            if (person != null) {
+                            if (person != null && (person instanceof Clientes)) {
 
                                 if (person.getCpf().equals(Cpf)) {
 
@@ -229,6 +250,7 @@ public class Main {
                     break;
 
                 case 7:
+
                     System.out.println(" Aquisição de produtos" + "\nDigite o código do produto");
                     int cod = scan.nextInt();
                     System.out.println("Nome do produto:");
@@ -241,6 +263,7 @@ public class Main {
                     estoque.add(new Estoque(p));
                     System.out.println("Compra efetuada com sucesso!");
                     break;
+
                 case 8:
 
                     System.out.println("Digite o cpf do cliente : ");
@@ -248,12 +271,14 @@ public class Main {
 
                     for (int i = 0; i < pessoas.size(); i++) {
 
-                        if (pessoas.get(i) != null) {
+                        if (pessoas.get(i) != null && (pessoas.get(i) instanceof Clientes)) {
 
-                            if (pessoas.get(i).getCpf().equals(cpf)) {
+                            if (pessoas.get(i).getCpf().equals(cpf) && (pessoas.get(i) instanceof Clientes)) {
 
                                 // scan.nextLine();
+                                pessoas.remove(pessoas.get(i));
                                 System.out.println("Cliente apagado do banco de dados!");
+
                             } else {
 
                                 System.out.println("Cpf não encontrado!");
@@ -261,7 +286,7 @@ public class Main {
 
                         } else {
 
-                            System.out.println("Nenhuma pessoa cadastrada até o momento!");
+                            System.out.println("Nenhum cliente cadastrado até o momento!");
                         }
                     }
 
@@ -270,10 +295,13 @@ public class Main {
                 case 9:
 
                     if (caixa.isEmpty()) {
+
                         System.out.println("Seu saldo está zerado, precisa realizar vendas");
+
                         break;
 
                     } else {
+
                         System.out.println("Total de vendas e saldo: " + caixa.get(caixa.size() - 1));
 
                     }
@@ -295,9 +323,38 @@ public class Main {
                     String id = scan.next();
 
                     pessoas.add(new Funcionario(nomeFunc, cpfFuncionario, email, telefone, id));
-                    System.out.println("*** *** ***");
+                    System.out.println("Funcionário cadastrado com sucesso");
 
                     break;
+
+                case 12:
+
+                    System.out.println("Digite o id do funcionário : ");
+                    String idFunc = scan.next();
+
+                    for (int i = 0; i < pessoas.size(); i++) {
+
+                        if (pessoas.get(i) != null && (pessoas.get(i) instanceof Funcionario)) {
+
+                            if (pessoas.get(i).getCpf().equals(idFunc)) {
+
+                                // scan.nextLine();
+                                pessoas.remove(pessoas.get(i));
+                                System.out.println("Funcionario apagado do banco de dados!");
+
+                            } else {
+
+                                System.out.println("Cpf não encontrado!");
+                            }
+
+                        } else {
+
+                            System.out.println("Nenhum Empregado cadastrado até o momento!");
+                        }
+                    }
+
+                    break;
+
                 case 0:
 
                     System.out.println("Saiu!");
