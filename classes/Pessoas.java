@@ -1,6 +1,7 @@
 import java.util.Objects;
 
 public abstract class Pessoas {
+
     private String nome;
     private String cpf;
     private String email;
