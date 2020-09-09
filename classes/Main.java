@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -14,8 +13,6 @@ public class Main {
         ArrayList<Estoque> estoque = new ArrayList<Estoque>();
         ArrayList<Produtos> p = new ArrayList<Produtos>();
         ArrayList<Pessoas> pessoas = new ArrayList<Pessoas>();
-        // ArrayList<Clientes> clientes = new ArrayList<Clientes>();
-        // ArrayList<Endereco> endereco = new ArrayList<Endereco>();
 
         boolean yes = true;
         boolean continua = true;
@@ -169,8 +166,6 @@ public class Main {
 
                         if (produtos4.getCodigo() == cod4) {
 
-                            // ArrayList<Caixa> caixa4 = new ArrayList<>();
-                            // caixa4.add(caixa.get(caixa.size() - 2));
                             double preco = 0;
                             preco -= produtos4.getPreco();
                             double vendas4 = 1;
@@ -222,7 +217,6 @@ public class Main {
 
                         System.out.println("Digite o numero do Cpf :");
                         String Cpf = scan.next();
-                        // Pessoas person = buscarPessoa(Cpf, pessoas);
 
                         for (Pessoas person : pessoas) {
 
