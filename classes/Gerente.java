@@ -1,24 +1,20 @@
 import java.util.Objects;
 
 public class Gerente {
-    private final String LOGIN = "adm";
-    private final String SENHA = "889933";
 
+    private final String LOGIN = "adm";
+    private final String SENHA = "adm";
 
     public Gerente() {
     }
-
-    
 
     public String getLOGIN() {
         return this.LOGIN;
     }
 
-
     public String getSENHA() {
         return this.SENHA;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -38,9 +34,6 @@ public class Gerente {
 
     @Override
     public String toString() {
-        return "{" +
-            " LOGIN='" + getLOGIN() + "'" +
-            ", SENHA='" + getSENHA() + "'" +
-            "}";
+        return "{" + " LOGIN='" + getLOGIN() + "'" + ", SENHA='" + getSENHA() + "'" + "}";
     }
 }

@@ -1,40 +1,39 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
         Scanner scan = new Scanner(System.in);
 
-        String nomeCliente, cpf, email, telefone, rua, bairro, cidade, uf, cep, complemento;
         double soma = 0, saldo = 0;
-        int numeroCasa = 0;
-        int quant = 1;
+        // int quant = 1;
 
         ArrayList<Caixa> caixa = new ArrayList<Caixa>();
         ArrayList<Estoque> estoque = new ArrayList<Estoque>();
         ArrayList<Produtos> p = new ArrayList<Produtos>();
-        ArrayList<Clientes> c = new ArrayList<Clientes>();
-        ArrayList<Endereco> endereco = new ArrayList<Endereco>();
-        Clientes newCliente = new Clientes();
-
-        Gerente gerente = new Gerente();
+        ArrayList<Pessoas> pessoas = new ArrayList<Pessoas>();
+        // ArrayList<Clientes> clientes = new ArrayList<Clientes>();
+        // ArrayList<Endereco> endereco = new ArrayList<Endereco>();
 
         boolean yes = true;
         boolean continua = true;
 
         while (yes) {
 
-
             System.out.println("\nStudio EncanARTE" + "\n1. Realizar Vendas " + "\n2. Cadastrar Clientes "
+
                     + "\n3. Acessar Estoque " + "\n4. Cancelar Venda" + "\n5. Listar Clientes"
                     + "\n6. Buscar cliente(pelo cpf)" + "\n7. Aquisição de Produtos" + "\n8. Excluir Clientes"
-                    + "\n9. Ver Saldo Caixa" + "\n0. Sair");
+                    + "\n9. Ver Saldo Caixa" + "\n10 Editar clientes" + "\n11 Cadastrar Funcionario"
+                    + "\n12 Remover funcionario" + "\n0. Sair");
 
             int op = scan.nextInt();
 
             switch (op) {
+
                 case 1:
 
                     System.out.println("Digite o código do produto: ");
@@ -50,54 +49,49 @@ public class Main {
                             System.out.println("Operação inválida");
                         }
                     }
-                    if(p.isEmpty()){
-                        System.out.println("Precisa ter o produto cadastrado");
-
-                    }
 
                     break;
+
                 case 2:
 
                     do {
 
                         try {
 
-                            Clientes client = new Clientes();
-
                             System.out.println("Cadastrar clientes");
                             System.out.println("Dados pessoais");
                             System.out.println("*** *** ***");
                             System.out.println("Digite o nome do cliente : ");
-                            nomeCliente = scan.next();
+                            String nomeCliente = scan.next();
                             System.out.println("Digite o cpf do cliente : ");
-                            cpf = scan.next();
+                            String cpf = scan.next();
                             System.out.println("Digite o email do cliente : ");
-                            email = scan.next();
+                            String email = scan.next();
                             System.out.println("Digite o telefone do cliente : ");
-                            telefone = scan.next();
+                            String telefone = scan.next();
                             System.out.println("*** *** ***");
+
                             System.out.println("Endereço");
-                            Endereco adress = new Endereco();
 
                             System.out.println("Digite o nome da rua : ");
-                            rua = scan.next();
+                            String rua = scan.next();
                             // e.setRua(rua);
                             System.out.println("Digite o nome do bairro : ");
-                            bairro = scan.next();
+                            String bairro = scan.next();
                             System.out.println("Digite o número da residencia : ");
-                            numeroCasa = scan.nextInt();
+                            int numeroCasa = scan.nextInt();
 
                             System.out.println("Digite a cidade : ");
-                            cidade = scan.next();
+                            String cidade = scan.next();
                             System.out.println("Digite o estado : ");
-                            uf = scan.next();
+                            String uf = scan.next();
                             System.out.println("Digite o cep : ");
-                            cep = scan.next();
+                            String cep = scan.next();
                             System.out.println("Digite o complemento : ");
-                            complemento = scan.next();
+                            String complemento = scan.next();
 
-                            newCliente.cadastrarCliente(client, adress, nomeCliente, cpf, email, telefone, rua, bairro,
-                                    numeroCasa, cidade, uf, cep, complemento);
+                            Endereco adress = new Endereco(rua, bairro, numeroCasa, cidade, uf, cep, complemento);
+                            pessoas.add(new Clientes(nomeCliente, cpf, email, telefone, adress));
 
                             System.out.println("Cliente cadastrado com sucesso!");
 
@@ -116,11 +110,13 @@ public class Main {
                     break;
 
                 case 3:
-                    // Acesso ao estoque
+
                     System.out.println("Digite o usuário: ");
                     String login = scan.next();
                     System.out.println("Digite a senha: ");
                     String senha = scan.next();
+
+                    Gerente gerente = new Gerente();
 
                     if (gerente.getLOGIN().equals(login) & gerente.getSENHA().equals(senha)) {
                         System.out
@@ -151,46 +147,85 @@ public class Main {
                     break;
                 case 4:
 
-                    System.out.println("Digite o código: ");
+                    System.out.println("Cancelar vendas: ");
                     int cod4 = scan.nextInt();
+
                     for (Produtos produtos4 : p) {
+
                         if (produtos4.getCodigo() == cod4) {
+
                             // ArrayList<Caixa> caixa4 = new ArrayList<>();
                             // caixa4.add(caixa.get(caixa.size() - 2));
-                            soma -= 1;
-                            saldo -= produtos4.getPreco();
+                            double preco = 0;
+                            preco -= produtos4.getPreco();
+                            double vendas4 = 1;
+                            vendas4 -= 1;
 
-                            caixa.add(new Caixa(soma, saldo));
+                            caixa.add(new Caixa(vendas4, preco));
                             System.out.println("Saldo atual: " + caixa.get(caixa.size() - 1));
-                            break;
-                        } else if (cod4 != produtos4.getCodigo()) {
-                            System.out.println("Operação inválida !");
-                            break;
+
+                        } else if (produtos4.getCodigo() != cod4) {
+
+                            System.out.println("Código inválido!");
 
                         }
 
                     }
-                    if(p.isEmpty()){
-                        System.out.println("Precisa cadastrar um produto(Fazer Aquisição). ");
 
-                    }
                     break;
 
                 case 5:
 
                     System.out.println("Lista de clientes");
                     System.out.println("*****************");
-                    newCliente.listarClientes();
+
+                    for (Pessoas person : pessoas) {
+
+                        if (person != null && (person instanceof Clientes)) {
+
+                            System.out.println("Nome : " + person.getNome());
+                            System.out.println("Telefone : " + person.getTelefone());
+
+                        } else {
+
+                            System.out.println("Nenhuma pessoa cadastrada até o momento!");
+                        }
+
+                    }
 
                     break;
 
                 case 6:
 
-                    System.out.println("Digite o numero do cpf o qual deseja consultar : ");
-                    cpf = scan.next();
-                    newCliente.buscarCliente(cpf);
-                    scan.nextLine();
-                    System.out.println("... ...");
+                    if (pessoas.size() > 0) {
+
+                        System.out.println("Digite o numero do CPF (somente números):");
+                        String Cpf = scan.next();
+                        // Pessoas person = buscarPessoa(Cpf, pessoas);
+
+                        for (Pessoas person : pessoas) {
+
+                            if (person != null) {
+
+                                if (person.getCpf().equals(Cpf)) {
+
+                                    System.out.println("Nome: " + person.getNome());
+                                    System.out.println("Email: " + person.getEmail());
+
+                                } else {
+
+                                    System.out.println("Cpf não encontrado!");
+                                }
+
+                            } else {
+
+                                System.out.println("Nenhuma pessoa cadastrada até o momento!");
+                            }
+
+                        }
+
+                    }
+
                     break;
 
                 case 7:
@@ -209,9 +244,26 @@ public class Main {
                 case 8:
 
                     System.out.println("Digite o cpf do cliente : ");
-                    cpf = scan.next();
-                    newCliente.removerClientes(cpf);
-                    scan.nextLine();
+                    String cpf = scan.next();
+
+                    for (int i = 0; i < pessoas.size(); i++) {
+
+                        if (pessoas.get(i) != null) {
+
+                            if (pessoas.get(i).getCpf().equals(cpf)) {
+
+                                // scan.nextLine();
+                                System.out.println("Cliente apagado do banco de dados!");
+                            } else {
+
+                                System.out.println("Cpf não encontrado!");
+                            }
+
+                        } else {
+
+                            System.out.println("Nenhuma pessoa cadastrada até o momento!");
+                        }
+                    }
 
                     break;
 
@@ -226,17 +278,40 @@ public class Main {
 
                     }
 
+                case 11:
+
+                    System.out.println("Cadastrar funcionarios");
+                    System.out.println("Dados pessoais");
+                    System.out.println("*** *** ***");
+                    System.out.println("Digite o nome do Funcionario : ");
+                    String nomeFunc = scan.next();
+                    System.out.println("Digite o cpf : ");
+                    String cpfFuncionario = scan.next();
+                    System.out.println("Digite o email : ");
+                    String email = scan.next();
+                    System.out.println("Digite o telefone : ");
+                    String telefone = scan.next();
+                    System.out.println("Digite o id do funcionario : ");
+                    String id = scan.next();
+
+                    pessoas.add(new Funcionario(nomeFunc, cpfFuncionario, email, telefone, id));
+                    System.out.println("*** *** ***");
+
                     break;
                 case 0:
+
                     System.out.println("Saiu!");
                     yes = false;
-                default:
-                    break;
-            }
 
+                default:
+
+                    break;
+
+            }
         }
 
         scan.close();
 
     }
+
 }
